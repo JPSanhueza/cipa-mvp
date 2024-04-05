@@ -1,0 +1,11 @@
+created:
+    - database/factories/ClienteFactory.php
+    - database/factories/DatosFacturacionFactory.php
+    - database/migrations/2024_04_05_125007_create_clientes_table.php
+    - database/migrations/2024_04_05_125008_create_datos_facturacions_table.php
+    - app/Models/Cliente.php
+    - app/Models/DatosFacturacion.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Cliente: { nombre_empresa: string, nombre_contacto: string, apellido_contacto: string, telefono_contacto: string, email_contacto: string, relationships: { hasOne: DatosFacturacion } }
+    DatosFacturacion: { cliente_id: 'id foreign:clientes', rut: string, razon_social: string, direccion: string, pais: string, comuna: string, ciudad: string, giro: string, telefono_facturacion: string, relationships: { belongsTo: Cliente } }

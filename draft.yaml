@@ -1,0 +1,24 @@
+models:
+  Cliente:   
+    nombre_empresa: string
+    nombre_contacto: string
+    apellido_contacto: string
+    telefono_contacto: string
+    email_contacto: string
+    relationships:
+      hasOne: DatosFacturacion  
+   
+  DatosFacturacion:  
+    cliente_id: id foreign:clientes
+    rut: string
+    razon_social: string
+    direccion: string
+    pais: string
+    comuna: string
+    ciudad: string
+    giro: string
+    telefono_facturacion: string    
+    relationships:   
+      belongsTo: Cliente
+    
+
