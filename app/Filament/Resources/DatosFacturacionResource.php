@@ -17,6 +17,7 @@ class DatosFacturacionResource extends Resource
 {
     protected static ?string $model = DatosFacturacion::class;
     protected static ?string $pluralModelLabel = 'Datos Facturacion';
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
