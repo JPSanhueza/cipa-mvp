@@ -35,9 +35,9 @@ class PropuestaResource extends Resource
                 Forms\Components\TextInput::make('resultados')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('item_id')
-                    ->required()
-                    ->numeric(),
+                // Forms\Components\TextInput::make('item_id')
+                //     ->required()
+                //     ->numeric(),
                 Forms\Components\Select::make('estado_propuesta_id')
                     ->relationship('estadoPropuesta', 'nombre')
                     ->required(),
