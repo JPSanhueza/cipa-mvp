@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class DatosFacturacionResource extends Resource
 {
     protected static ?string $model = DatosFacturacion::class;
-    protected static ?string $pluralModelLabel = 'Datos Facturacion';
     protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -60,7 +59,7 @@ class DatosFacturacionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('cliente.nombre_empresa')
+                Tables\Columns\TextColumn::make('cliente.id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('rut')

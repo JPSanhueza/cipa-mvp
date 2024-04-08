@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cliente extends Model
@@ -35,5 +36,10 @@ class Cliente extends Model
     public function datosFacturacion(): HasOne
     {
         return $this->hasOne(DatosFacturacion::class);
+    }
+
+    public function propuestas(): HasMany
+    {
+        return $this->hasMany(Propuesta::class);
     }
 }

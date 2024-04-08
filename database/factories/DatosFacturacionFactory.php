@@ -22,7 +22,6 @@ class DatosFacturacionFactory extends Factory
     public function definition(): array
     {
         return [
-            'cliente_id' => Cliente::factory(),
             'rut' => $this->faker->word(),
             'razon_social' => $this->faker->word(),
             'direccion' => $this->faker->word(),
@@ -31,6 +30,7 @@ class DatosFacturacionFactory extends Factory
             'ciudad' => $this->faker->word(),
             'giro' => $this->faker->word(),
             'telefono_facturacion' => $this->faker->word(),
+            'cliente_id' => Cliente::factory(),
         ];
     }
 }

@@ -21,7 +21,7 @@ class DatosFacturacionRelationManager extends RelationManager
                 Forms\Components\TextInput::make('rut')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\TextInput::make('razon_social')
+                Forms\Components\TextInput::make('razon_social')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('direccion')
@@ -45,8 +45,6 @@ class DatosFacturacionRelationManager extends RelationManager
                     ->maxLength(255),
             ]);
     }
-
-   
 
     public function table(Table $table): Table
     {

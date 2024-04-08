@@ -6,10 +6,11 @@ models:
     telefono_contacto: string
     email_contacto: string
     relationships:
-      hasOne: DatosFacturacion  
+      hasOne: DatosFacturacion
+      hasMany: Propuesta  
    
   DatosFacturacion:  
-    cliente_id: id foreign:clientes
+    # cliente_id: id foreign:clientes
     rut: string
     razon_social: string
     direccion: string
@@ -20,5 +21,42 @@ models:
     telefono_facturacion: string    
     relationships:   
       belongsTo: Cliente
+
+  Propuesta:
+    cliente_id: id foreign:clientes
+    nombre: string
+    fecha: date   
+    resultados: string
+    # item_id: unsignedBigInteger
+    relationships:   
+      belongsTo: Cliente, EstadoPropuesta
+      hasMany: Item
+      
+
+  EstadoPropuesta:
+    nombre: string
+    relationships:
+      hasOne: Propuesta
+
+  Item:
+    nombre: string
+    descripcion: string   
+    relationships:
+      belongsTo: Propuesta
+      hasMany: Actividad
+
+  Actividad:
+    nombre: string
+    activo_fijo: string
+    rrhh: string
+    hrs_unidades: integer
+    sub_total_uf: integer
+    sub_total_pesos: integer
+    relationships:
+      belongsTo: Item
+
+
+
     
+  
 

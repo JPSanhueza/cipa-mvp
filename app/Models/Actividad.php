@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DatosFacturacion extends Model
+class Actividad extends Model
 {
     use HasFactory;
 
@@ -16,15 +16,13 @@ class DatosFacturacion extends Model
      * @var array
      */
     protected $fillable = [
-        'rut',
-        'razon_social',
-        'direccion',
-        'pais',
-        'comuna',
-        'ciudad',
-        'giro',
-        'telefono_facturacion',
-        'cliente_id',
+        'nombre',
+        'activo_fijo',
+        'rrhh',
+        'hrs_unidades',
+        'sub_total_uf',
+        'sub_total_pesos',
+        'item_id',
     ];
 
     /**
@@ -34,11 +32,11 @@ class DatosFacturacion extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'cliente_id' => 'integer',
+        'item_id' => 'integer',
     ];
 
-    public function cliente(): BelongsTo
+    public function item(): BelongsTo
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Item::class);
     }
 }

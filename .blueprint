@@ -1,11 +1,27 @@
 created:
     - database/factories/ClienteFactory.php
     - database/factories/DatosFacturacionFactory.php
-    - database/migrations/2024_04_05_125007_create_clientes_table.php
-    - database/migrations/2024_04_05_125008_create_datos_facturacions_table.php
+    - database/factories/PropuestaFactory.php
+    - database/factories/EstadoPropuestaFactory.php
+    - database/factories/ItemFactory.php
+    - database/factories/ActividadFactory.php
+    - database/migrations/2024_04_08_122319_create_clientes_table.php
+    - database/migrations/2024_04_08_122320_create_datos_facturacions_table.php
+    - database/migrations/2024_04_08_122321_create_propuestas_table.php
+    - database/migrations/2024_04_08_122322_create_estado_propuestas_table.php
+    - database/migrations/2024_04_08_122323_create_items_table.php
+    - database/migrations/2024_04_08_122324_create_actividads_table.php
     - app/Models/Cliente.php
     - app/Models/DatosFacturacion.php
+    - app/Models/Propuesta.php
+    - app/Models/EstadoPropuesta.php
+    - app/Models/Item.php
+    - app/Models/Actividad.php
 models:
     User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
-    Cliente: { nombre_empresa: string, nombre_contacto: string, apellido_contacto: string, telefono_contacto: string, email_contacto: string, relationships: { hasOne: DatosFacturacion } }
-    DatosFacturacion: { cliente_id: 'id foreign:clientes', rut: string, razon_social: string, direccion: string, pais: string, comuna: string, ciudad: string, giro: string, telefono_facturacion: string, relationships: { belongsTo: Cliente } }
+    Cliente: { nombre_empresa: string, nombre_contacto: string, apellido_contacto: string, telefono_contacto: string, email_contacto: string, relationships: { hasOne: DatosFacturacion, hasMany: Propuesta } }
+    DatosFacturacion: { rut: string, razon_social: string, direccion: string, pais: string, comuna: string, ciudad: string, giro: string, telefono_facturacion: string, relationships: { belongsTo: Cliente } }
+    Propuesta: { cliente_id: 'id foreign:clientes', nombre: string, fecha: date, resultados: string, item_id: unsignedBigInteger, relationships: { belongsTo: 'Cliente, EstadoPropuesta', hasMany: Item } }
+    EstadoPropuesta: { nombre: string, relationships: { hasOne: Propuesta } }
+    Item: { nombre: string, descripcion: string, relationships: { belongsTo: Propuesta, hasMany: Actividad } }
+    Actividad: { nombre: string, activo_fijo: string, rrhh: string, hrs_unidades: integer, sub_total_uf: integer, sub_total_pesos: integer, relationships: { belongsTo: Item } }

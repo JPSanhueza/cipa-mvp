@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DatosFacturacion extends Model
+class Propuesta extends Model
 {
     use HasFactory;
 
@@ -16,15 +17,12 @@ class DatosFacturacion extends Model
      * @var array
      */
     protected $fillable = [
-        'rut',
-        'razon_social',
-        'direccion',
-        'pais',
-        'comuna',
-        'ciudad',
-        'giro',
-        'telefono_facturacion',
         'cliente_id',
+        'nombre',
+        'fecha',
+        'resultados',
+        'item_id',
+        'estado_propuesta_id',
     ];
 
     /**
@@ -35,10 +33,23 @@ class DatosFacturacion extends Model
     protected $casts = [
         'id' => 'integer',
         'cliente_id' => 'integer',
+        'fecha' => 'date',
+        'item_id' => 'integer',
+        'estado_propuesta_id' => 'integer',
     ];
 
     public function cliente(): BelongsTo
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function estadoPropuesta(): BelongsTo
+    {
+        return $this->belongsTo(EstadoPropuesta::class);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
     }
 }
