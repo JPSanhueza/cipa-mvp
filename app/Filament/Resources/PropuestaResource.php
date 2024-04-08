@@ -52,11 +52,14 @@ class PropuestaResource extends Resource
                     ->numeric()
                     ->sortable()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('fecha')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('resultados')
                     ->searchable(),
                 // Tables\Columns\TextColumn::make('item_id')
@@ -65,7 +68,8 @@ class PropuestaResource extends Resource
                 Tables\Columns\TextColumn::make('estadoPropuesta.nombre')
                     ->numeric()
                     ->sortable()
-                    ->badge(),
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -76,7 +80,11 @@ class PropuestaResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // Tables\Filters\TernaryFilter::make('estadoPropuesta.nombre'),
+                Tables\Filters\SelectFilter::make('estadoPropuesta')
+                ->relationship('estadoPropuesta', 'nombre'),
+                Tables\Filters\SelectFilter::make('cliente')
+                ->relationship('cliente', 'nombre_empresa'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -92,6 +100,7 @@ class PropuestaResource extends Resource
     {
         return [
             // RelationManagers\ItemsRelationManager::class,
+            // RelationManagers\EstadoPropuestaRelationManager::class
             
         ];
     }
